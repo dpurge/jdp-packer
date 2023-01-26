@@ -33,9 +33,6 @@ source "docker" "jdp-wsl-ubuntu" {
   export_path = "${path.root}/${var.dir_img}/jdp-wsl-ubuntu-${var.ubuntu_version}-${var.build_version}.tar"
 }
 
-# post-processors {
-# }
-
 build {
   name = "jdp-wsl-ubuntu"
   sources = [
@@ -66,10 +63,10 @@ build {
       "DEBIAN_FRONTEND=noninteractive",
       "DIRECTORY_INSTALL=${var.dir_install}"
     ]
-    execute_command  = "bash -c '{{ .Vars }} {{ .Path }}'"
-    scripts          = [
+    execute_command = "bash -c '{{ .Vars }} {{ .Path }}'"
+    scripts = [
       "${path.root}/linux/installer/base-system.sh",
-      "${path.root}/linux/installer/rdp.sh",
+      "${path.root}/linux/installer/xrdp.sh",
       "${path.root}/linux/installer/dotnet-sdk.sh",
       "${path.root}/linux/installer/powershell.sh",
       "${path.root}/linux/installer/packer.sh",
@@ -80,6 +77,6 @@ build {
       "${path.root}/linux/installer/golang.sh",
       "${path.root}/linux/installer/nodejs.sh",
       "${path.root}/linux/installer/python.sh"
-      ]
+    ]
   }
 }
